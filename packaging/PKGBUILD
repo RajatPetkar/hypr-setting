@@ -1,0 +1,22 @@
+# Maintainer: Rajat Petkar <rajatpetkar250@gmail.com>
+pkgname=hypr-settings
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Hypr Settings - Hyprland control center"
+arch=(x86_64)
+url="https://github.com/rajatpetkar/hypr-settings"
+license=(MIT)
+source=("https://github.com/rajatpetkar/hypr-settings/releases/download/v${pkgver}/hypr-settings-${pkgver}-linux.tar.gz")
+sha256sums=(SKIP)
+
+build() {
+  return 0
+}
+
+package() {
+  cd "$srcdir"
+  tar -xzf "hypr-settings-${pkgver}-linux.tar.gz"
+  install -Dm755 hypr-settings "$pkgdir/usr/bin/hypr-settings"
+  install -Dm644 hypr-settings.desktop "$pkgdir/usr/share/applications/hypr-settings.desktop"
+  install -Dm644 icons/128x128.png "$pkgdir/usr/share/icons/hicolor/128x128/apps/hypr-settings.png"
+}

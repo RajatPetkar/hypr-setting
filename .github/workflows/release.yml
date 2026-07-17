@@ -1,0 +1,108 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libwebkit2gtk-4.1-dev \
+            build-essential \
+            curl \
+            wget \
+            file \
+            libssl-dev \
+            libayatana-appindicator3-dev \
+            librsvg2-dev
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Build Tauri binary
+        working-directory: src-tauri
+        run: cargo build --release
+
+      - name: Package release
+        run: |
+          VERSION="${GITHUB_REF#refs/tags/v}"
+          # Fallback for workflow_dispatch
+          if [[ "$VERSION" == "$GITHUB_REF" ]]; then
+            VERSION="0.1.0"
+          fi
+          RELEASE_NAME="hypr-settings-${VERSION}-linux-x86_64"
+          mkdir -p "release/${RELEASE_NAME}/icons"
+
+          # Binary
+          cp src-tauri/target/release/hypr-settings "release/${RELEASE_NAME}/"
+          chmod +x "release/${RELEASE_NAME}/hypr-settings"
+
+          # Icons
+          for icon in 32x32.png 128x128.png 128x128@2x.png icon.png icon.svg; do
+            cp "src-tauri/icons/$icon" "release/${RELEASE_NAME}/icons/" 2>/dev/null || true
+          done
+
+          # Desktop entry
+          cat > "release/${RELEASE_NAME}/hypr-settings.desktop" << 'DESKTOP'
+          [Desktop Entry]
+          Type=Application
+          Name=Hypr Settings
+          Comment=Hyprland settings control center
+          Exec=hypr-settings
+          Icon=hypr-settings
+          Categories=Settings;DesktopSettings;
+          Terminal=false
+          StartupWMClass=Hypr Settings
+          Keywords=hyprland;settings;config;wayland;
+          DESKTOP
+          sed -i 's/^          //' "release/${RELEASE_NAME}/hypr-settings.desktop"
+
+          # Installer (extract from release directory)
+          cp release-installer.sh "release/${RELEASE_NAME}/install.sh"
+          chmod +x "release/${RELEASE_NAME}/install.sh"
+
+          # README
+          cp INSTALL.md "release/${RELEASE_NAME}/README.md"
+
+          # Create tarball + checksum
+          cd release
+          tar -czf "${RELEASE_NAME}.tar.gz" "${RELEASE_NAME}/"
+          sha256sum "${RELEASE_NAME}.tar.gz" > "${RELEASE_NAME}.tar.gz.sha256"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          generate_release_notes: true
+          files: |
+            release/hypr-settings-*-linux-x86_64.tar.gz
+            release/hypr-settings-*-linux-x86_64.tar.gz.sha256

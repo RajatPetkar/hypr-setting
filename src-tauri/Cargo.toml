@@ -1,0 +1,25 @@
+[package]
+name = "hypr-settings"
+version = "0.1.0"
+description = "Hypr Settings control center for Hyprland"
+authors = ["Hypr Settings"]
+edition = "2021"
+
+[lib]
+name = "hypr_settings_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.0.0", features = [] }
+
+[dependencies]
+anyhow = "1.0"
+chrono = { version = "0.4", features = ["serde"] }
+dirs = "5.0"
+notify = "6.1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tauri = { version = "2.0.0", features = ["protocol-asset", "tray-icon"] }
+tauri-plugin-notification = "2.0.0"
+tauri-plugin-shell = "2.0.0"
+walkdir = "2.5"

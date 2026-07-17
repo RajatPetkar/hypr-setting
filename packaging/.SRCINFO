@@ -1,0 +1,9 @@
+pkgname = hypr-settings
+pkgver = 0.1.0
+pkgrel = 1
+pkgdesc = "Hypr Settings - Hyprland control center"
+arch = (x86_64)
+url = "https://github.com/rajatpetkar/hypr-settings"
+license = (MIT)
+source = ("https://github.com/rajatpetkar/hypr-settings/releases/download/v${pkgver}/hypr-settings-${pkgver}-linux.tar.gz")
+sha256sums = (SKIP)
