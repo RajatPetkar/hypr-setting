@@ -23,9 +23,9 @@ Hypr Settings allows users to customize and manage their Hyprland setup through 
 
 ## 📸 Screenshots
 
-<img width="1920" height="1080" alt="swappy-20260702-115036" src="https://github.com/user-attachments/assets/53f7ec41-15aa-4cdc-9bac-8bdb925462ab" />
-<img width="1920" height="1080" alt="swappy-20260702-114847" src="https://github.com/user-attachments/assets/dc603bc1-cc61-4815-a88d-03d23ed12cb3" />
-
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
 ---
 
 ## 📦 Installation
@@ -102,9 +102,3 @@ If you encounter bugs or have feature requests, please open an issue on GitHub.
 - Hyprland developers and community.
 
 ---
-
-## 📄 License
-
-This repository distributes pre-built binaries only.
-
-The source code is currently not publicly available.
