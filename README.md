@@ -1,38 +1,34 @@
-<p align="center">
-  <img src="src-tauri/icons/icon.png" width="128" height="128" alt="Hypr Settings">
-</p>
+# Hypr Settings
 
-<h1 align="center">Hypr Settings</h1>
+A graphical settings manager for the **JaKooLit Arch-Hyprland** configuration.
 
-<p align="center">
-  <strong>A desktop control center for Hyprland</strong>
-  <br>
-  Manage keybindings, appearance, wallpapers, animations, startup apps, window rules, monitors, themes, and backups — all from a beautiful GUI.
-</p>
+Hypr Settings allows users to customize and manage their Hyprland setup through a simple GUI instead of manually editing configuration files.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Platform-Linux-blue?style=flat-square" alt="Linux">
-  <img src="https://img.shields.io/badge/WM-Hyprland-cyan?style=flat-square" alt="Hyprland">
-  <img src="https://img.shields.io/badge/Built_with-Tauri_2-orange?style=flat-square" alt="Tauri 2">
-  <img src="https://img.shields.io/github/v/release/rajatpetkar/hypr-settings?style=flat-square&color=green" alt="Release">
-  <img src="https://img.shields.io/github/license/rajatpetkar/hypr-settings?style=flat-square" alt="License">
-</p>
+> Designed specifically for users of JaKooLit's Arch-Hyprland installation.
 
 ---
 
-## Install
+## ✨ Features
 
-### One-liner
+- 🎨 Theme customization
+- 🖼️ Wallpaper management
+- ⚙️ Edit Hyprland settings through a GUI
+- 🔥 Enable/Disable animations and effects
+- 🖥️ Waybar customization
+- ⌨️ Configure keybindings
+- 💾 Backup and restore configurations
+- 🚀 Simple installation and easy to use interface
 
-```bash
-curl -fsSL https://github.com/rajatpetkar/hypr-settings/releases/latest/download/hypr-settings-0.1.0-linux-x86_64.tar.gz | tar -xz && cd hypr-settings-*-linux-x86_64 && ./install.sh
-```
+---
 
-### Manual download
+## 📸 Screenshots
 
-1. Go to [**Releases**](https://github.com/rajatpetkar/hypr-settings/releases/latest)
-2. Download `hypr-settings-<version>-linux-x86_64.tar.gz`
-3. Extract and install:
+<img width="1920" height="1080" alt="swappy-20260702-115036" src="https://github.com/user-attachments/assets/53f7ec41-15aa-4cdc-9bac-8bdb925462ab" />
+<img width="1920" height="1080" alt="swappy-20260702-114847" src="https://github.com/user-attachments/assets/dc603bc1-cc61-4815-a88d-03d23ed12cb3" />
+
+---
+
+## 📦 Installation
 
 ```bash
 tar -xzf hypr-settings-*-linux-x86_64.tar.gz
@@ -40,136 +36,75 @@ cd hypr-settings-*-linux-x86_64
 ./install.sh
 ```
 
-4. Launch from your app menu or run `hypr-settings`
-
-### Arch Linux (AUR)
-
-```bash
-# Coming soon — or build from source:
-git clone https://github.com/rajatpetkar/hypr-settings.git
-cd hypr-settings
-npm install
-bash install.sh
-```
-
-### Uninstall
+## Uninstall
 
 ```bash
 ./install.sh --uninstall
 ```
-
 ---
 
-## Features
+## 📁 Package Contents
 
-| Feature | Description |
-|---------|-------------|
-| 🖥️ **Dashboard** | System overview with theme, animation, wallpaper, monitors, and quick actions |
-| ⌨️ **Keybindings** | Search, edit, create, delete — with conflict detection |
-| 🎨 **Appearance** | Gaps, borders, colors, blur, rounding, opacity — applied live |
-| 💫 **Animations** | Browse and switch animation presets |
-| 🖼️ **Wallpapers** | Browse `~/Pictures/Wallpapers` and `~/.config/hypr/wallpapers` |
-| 🚀 **Startup Apps** | Manage `exec-once` entries |
-| 📐 **Window Rules** | Edit `windowrule` and `windowrulev2` entries |
-| 🖥️ **Monitors** | Configure resolution, position, scale from `monitors.conf` |
-| 🎭 **Themes** | Switch GTK, icon, and cursor themes; run Wallust |
-| 💾 **Backups** | Auto-backup before every write; restore, export, import configs |
-| 🔍 **Global Search** | Jump to any settings page instantly |
-| 🔄 **Live Reload** | File watcher refreshes UI when configs change externally |
-| 🌙 **Dark Mode** | Toggle dark/light mode |
-
----
-
-## Supported Config Layout
-
-```text
-~/.config/hypr/
-├── animations/          # Animation presets
-├── configs/             # System config files
-│   ├── Keybinds.conf
-│   ├── Startup_Apps.conf
-│   ├── SystemSettings.conf
-│   └── WindowRules.conf
-├── UserConfigs/         # Your personal overrides
-│   ├── UserSettings.conf
-│   ├── UserAnimations.conf
-│   ├── UserKeybinds.conf
-│   ├── Startup_Apps.conf
-│   └── WindowRules.conf
-├── monitors.conf
-└── hyprland.conf
+```
+hypr-settings
+├── hypr-settings
+├── hypr-settings.desktop
+├── install.sh
+├── icons/
+└── README.md
 ```
 
-> **Note:** Hypr Settings writes only to `UserConfigs/` and `monitors.conf`. System configs under `configs/` are read-only.
+| File | Description |
+|------|-------------|
+| `hypr-settings` | Main application binary |
+| `install.sh` | Installation script |
+| `hypr-settings.desktop` | Desktop launcher |
+| `icons/` | Application icons |
 
 ---
 
-## Requirements
+## 🖥️ Requirements
 
-| Package | Required |
-|---------|----------|
-| `hyprland` | ✅ |
-| `webkit2gtk-4.1` | ✅ |
-
-### Optional runtime tools
-
-```bash
-sudo pacman -S --needed swww waybar hyprlock wallust gsettings-desktop-schemas
-```
-
-| Tool | Feature |
-|------|---------|
-| `swww` / `hyprpaper` | Wallpaper switching |
-| `waybar` | Quick restart action |
-| `hyprlock` | Lock screen action |
-| `wallust` | Colorscheme generation |
-| `gsettings` | GTK/icon/cursor theme switching |
+- Linux
+- Hyprland
+- JaKooLit Arch-Hyprland configuration
 
 ---
 
-## Build from Source
+## ⚠️ Compatibility
 
-```bash
-# Prerequisites (Arch Linux)
-sudo pacman -S --needed nodejs npm rust webkit2gtk-4.1 base-devel
+This application is specifically built for:
 
-# Clone and build
-git clone https://github.com/rajatpetkar/hypr-settings.git
-cd hypr-settings
-npm install
-bash install.sh          # Build + install
-```
+- https://github.com/JaKooLit/Arch-Hyprland
+- https://github.com/JaKooLit/Hyprland-Dots
 
-After changes:
-```bash
-bash install.sh          # Rebuild + reinstall
-bash install.sh --skip-build  # Reinstall without rebuilding
-```
+Other Hyprland configurations may not be fully compatible.
 
 ---
 
-## Safety
+## ❗ Disclaimer
 
-Every config write creates a timestamped backup under:
+This project is **not affiliated with, maintained, or endorsed by JaKooLit**.
 
-```text
-~/.config/hypr/backups/YYYYMMDD-HHMMSS/
-```
-
-Use the Backups page to restore, export, or import configurations.
+It is an independent utility created to simplify customization of JaKooLit's configuration.
 
 ---
 
-## Contributing
+## 🐛 Issues & Suggestions
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+If you encounter bugs or have feature requests, please open an issue on GitHub.
 
 ---
 
-## License
+## ❤️ Credits
 
-[MIT](LICENSE)
+- JaKooLit for the amazing Arch-Hyprland setup.
+- Hyprland developers and community.
 
-## Developer
+---
 
-**Rajat Petkar** — [GitHub](https://github.com/rajatpetkar) · [Email](mailto:rajatpetkar250@gmail.com)
+## 📄 License
+
+This repository distributes pre-built binaries only.
+
+The source code is currently not publicly available.
